@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workouts</title>
+  <link rel="stylesheet" href="/CSS/log.css">
+  <link rel="stylesheet" href="/CSS/style.css">
+  <script src="scriptWork.js" defer></script>
+</head>
+<body>
+
+  <header class="header">
+
+  <h3>
+  <a href="index.html">FIT TRACKER</a>
+</h3>
+
+  <nav class="nav-bar">
+    <ul>
+      <li><a href ="workouts.html">Workouts</a></li>
+      <li><a href="#">Progress</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </nav>
+
+</header>
+
+<div class="text">
+  <h4><em>TRAINING LOG</em></h4>
+  <p><em>Visualize your consitency</em></p>
+</div>
+
+<div class="container">
+
+  <div class="calendar">
+
+    <h3>August 2026</h3>
+
+    <div>Mon</div>
+    <div>Tue</div>
+    <div>Wed</div>
+    <div>Thu</div>
+    <div>Fri</div>
+    <div>Sat</div>
+    <div>Sun</div>
+
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+    <button>5</button>
+    <button>6</button>
+    <button>7</button>
+
+  </div>
+
+
+  <div class="form-container">
+
+    <div class="workout-form">
+
+      <h3>LOG WORKOUT</h3>
+
+      <form>
+       
+        <label for="name">WORKOUT NAME</label>
+        <input type="text" id="name" placeholder="Push day...">
+
+        <label for="type">TYPE</label>
+        <input type="text" id="type" placeholder="STRENGTH..">
+
+        <label for="duration">DURATION (MINUTES)</label>
+        <input type="number" id="duration" placeholder="30 min..."> 
+
+        <label for="note">NOTES</label>
+        <input type="text" id="note" placeholder="Describe...">
+
+        <button type="button" id="create">CREATE & ADD EXCERCISE</button>
+      </form>
+
+    </div>
+
+  </div>
+<div id="display"></div>
+
+</div>
+
+
+</body>
+
+<hr>
+
+<footer class="copyright">
+
+<p> &copy; 2026 Fitness Tracker. All rights reserved.</p>
+
+</footer>
+
+<hr>
+</html>

@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 3px;
+  box-sizing: border-box;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+body {
+    background-color: rgb(235, 223, 208);;
+}
+
+.workout-form {
+    width: 300px;
+    padding: 30px;
+    border: 2px solid;
+    border-radius: 10px;
+    background-color: white
+}
+
+.workout-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.workout-form input {
+    padding: 8px;
+}
+
+.workout-form button {
+    padding: 10px;
+    background-color: rgb(20, 19, 19);
+    color: rgb(228, 212, 212);
+    cursor: pointer;
+    border: 3px solid white;
+    border-radius: 8px;
+}
+
+.workout-form h3 {
+    position: relative;
+    bottom: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 8px 20px;
+    width: fit-content;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.header h3 a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+.container {
+  min-height: 100vh;
+  display: flex;
+  gap: 40px;
+}
+.calendar {
+  width: 400px;
+  padding: 10px;
+  margin-top: 3px;
+  margin-bottom: 50%;
+  border: 2px solid;
+  border-radius: 10px;
+  background-color: white;
+}
+#display {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.workout-card {
+    margin: 0 0 auto 50px;
+    padding: 25px;
+    border: 2px solid #222;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15);
+}
+
+.workout-card h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.workout-card p {
+    margin: 8px 0;
+}
