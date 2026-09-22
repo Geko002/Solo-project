@@ -89,3 +89,9 @@ body {
 .workout-card p {
     margin: 8px 0;
 }
+
+.weekdays,#calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}

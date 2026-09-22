@@ -1,4 +1,3 @@
-// Input event test for workout calender display 
 
 const workName = document.querySelector("#name");
 const type = document.querySelector("#type");
@@ -72,9 +71,44 @@ const loadWorkouts = () => {
 
 }
 
+const renderCalendar = () => {
+
+    const monthTitle =  document.getElementById("month-title");
+    const calenderDays = document.getElementById("calendar-days");
+    calenderDays.innerHTML = "";
+
+
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    monthTitle.textContent = `${currentDate.toLocaleString("default", { month: "long" })} ${year}`;
+
+    const offset = (firstDay + 6) % 7;
+
+    for (let i = 0; i < offset; i++) {
+        const emptyDiv = document.createElement("div");
+        calenderDays.appendChild(emptyDiv);
+    }
+
+    const daysinMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let day = 1; day <= daysinMonth; day++) {
+
+    const button = document.createElement("button");
+    button.textContent = day;
+    calenderDays.appendChild(button);
+
+    }
+
+}
+
+
+
 
 loadWorkouts();
 renderWorkouts();
+renderCalendar();
 
 
 
