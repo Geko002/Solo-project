@@ -11,12 +11,15 @@ const workoutList = [];
 
 clickEvent.addEventListener("click", () => {
 
+    const now = new Date();
+
 
 const workoutObj = {
     workName: workName.value,
     type: type.value,
     duration: duration.value,
-    note: note.value
+    note: note.value,
+    date: getDateKey(now.getFullYear(), now.getMonth(), now.getDate())
 };
 
 workoutList.push(workoutObj);
@@ -103,6 +106,12 @@ const renderCalendar = () => {
 
 }
 
+const getDateKey = (year, month, day) => {
+    year = year.toString().padStart(4, "0");
+    month = (month + 1).toString().padStart(2, "0");
+    day = day.toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
 
 
 
