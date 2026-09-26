@@ -53,6 +53,7 @@ const renderWorkouts = () => {
     deleteBtn.addEventListener("click", () => {
     workoutList.splice(i, 1);
     renderWorkouts();
+    renderCalendar();
     saveWorkouts();
 
 });
@@ -98,13 +99,23 @@ const renderCalendar = () => {
 
     for (let day = 1; day <= daysinMonth; day++) {
 
+
+    const dateKey = getDateKey(year, month, day);
+    const trained = workoutList.some(workrout => workrout.date === dateKey)
     const button = document.createElement("button");
     button.textContent = day;
-    calenderDays.appendChild(button);
+    calenderDays.appendChild(button)
+
+    if(trained){
+        button.classList.add("Completed");
 
     }
+    else {
+        button.classList.add("not-completed")
+    }
 
-}
+    }
+}   
 
 const getDateKey = (year, month, day) => {
     year = year.toString().padStart(4, "0");
@@ -112,7 +123,6 @@ const getDateKey = (year, month, day) => {
     day = day.toString().padStart(2, "0");
     return `${year}-${month}-${day}`;
 }
-
 
 
 loadWorkouts();
