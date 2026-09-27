@@ -25,6 +25,7 @@ const workoutObj = {
 workoutList.push(workoutObj);
 renderWorkouts();
 saveWorkouts();
+renderCalendar();
 
 });
 
