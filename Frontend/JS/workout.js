@@ -47,8 +47,22 @@ const renderWorkouts = () => {
             <p><strong>Type:</strong> ${workout.type}</p>
             <p><strong>Duration:</strong> ${workout.duration} minutes</p>
             <p><strong>Notes:</strong> ${workout.note}</p>
+            <button class="delete-btn">Delete</button>
         `;
+
         display.appendChild(card);
+
+    const deleteButton = card.querySelector(".delete-btn");
+        deleteButton.addEventListener("click", () => {
+            const index = workoutList.findIndex(w => w.id === workout.id)
+            if (index !== -1) {
+                workoutList.splice(index, 1);
+                saveWorkouts();
+                renderWorkouts();
+                renderCalendar();
+            }
+        });
+    
     });
 };
 
