@@ -11,6 +11,7 @@ let selectedDate = null;
 const workoutList = [];
 
 showAllBtn.addEventListener("click", () => {
+    dateInput.value = "";
     selectedDate = null;
     renderWorkouts();
 });
@@ -18,7 +19,7 @@ showAllBtn.addEventListener("click", () => {
 clickEvent.addEventListener("click", () => {
     const now = new Date();
     const selectedDateValue = dateInput.value;
-    
+
     const workoutObj = {
         workName: workName.value,
         type: type.value,
@@ -58,9 +59,9 @@ const renderWorkouts = () => {
 
         display.appendChild(card);
 
-    const deleteButton = card.querySelector(".delete-btn");
+        const deleteButton = card.querySelector(".delete-btn");
         deleteButton.addEventListener("click", () => {
-            const index = workoutList.findIndex(w => w.id === workout.id)
+            const index = workoutList.findIndex(w => w.id === workout.id);
             if (index !== -1) {
                 workoutList.splice(index, 1);
                 saveWorkouts();
@@ -68,7 +69,6 @@ const renderWorkouts = () => {
                 renderCalendar();
             }
         });
-    
     });
 };
 
@@ -119,6 +119,7 @@ const renderCalendar = () => {
 
         button.addEventListener("click", () => {
             selectedDate = dateKey;
+            dateInput.value = dateKey;
             renderWorkouts();
             renderCalendar();
         });
@@ -135,6 +136,3 @@ const getDateKey = (year, month, day) => {
 loadWorkouts();
 renderWorkouts();
 renderCalendar();
-
-
-
