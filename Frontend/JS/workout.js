@@ -5,6 +5,7 @@ const note = document.querySelector("#note");
 const clickEvent = document.querySelector("#create");
 const display = document.getElementById("display");
 const showAllBtn = document.getElementById("show-all-btn");
+const dateInput = document.querySelector("#date");
 
 let selectedDate = null;
 const workoutList = [];
@@ -16,7 +17,8 @@ showAllBtn.addEventListener("click", () => {
 
 clickEvent.addEventListener("click", () => {
     const now = new Date();
-
+    const selectedDateValue = dateInput.value;
+    
     const workoutObj = {
         workName: workName.value,
         type: type.value,
@@ -25,6 +27,9 @@ clickEvent.addEventListener("click", () => {
         date: getDateKey(now.getFullYear(), now.getMonth(), now.getDate()),
         id: Date.now()
     };
+    if (selectedDateValue) {
+        workoutObj.date = selectedDateValue;
+    }
 
     workoutList.push(workoutObj);
     renderWorkouts();
@@ -47,6 +52,7 @@ const renderWorkouts = () => {
             <p><strong>Type:</strong> ${workout.type}</p>
             <p><strong>Duration:</strong> ${workout.duration} minutes</p>
             <p><strong>Notes:</strong> ${workout.note}</p>
+            <p><strong>Date:</strong> ${workout.date}</p>
             <button class="delete-btn">Delete</button>
         `;
 
