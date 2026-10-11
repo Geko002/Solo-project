@@ -1,45 +1,49 @@
 
-const workoutContainer = document.querySelector('.workout-container');
-const weekdays = document.querySelector('.weekdays');
+const weekdays = document.getElementById('week');
 
 
-const renderIndex = () => {
-  workoutContainer.innerHTML = '';
-  workoutList.forEach(workout => {
-    const workoutCard = document.createElement('div');
-    workoutCard.classList.add('workout-card');
-    workoutCard.innerHTML = `
-      <div class="tittel">${workout.title}</div>
-      <div class="content">${workout.content}</div>
-    `;
-    workoutContainer.appendChild(workoutCard);
-  });
-};
+const renderWeek = () => {
 
-const renderWeekdays = () => {
+  weekdays.innerHTML = '';
+  
   const days = new Date().getDay();
   const monOffset = (days + 6) % 7;
 
   for (let i = 0; i < 7; i++) {
     const date = new Date();
     date.setDate(date.getDate() - monOffset + i);
-    const dayElement = document.createElement('div');
-    dayElement.classList.add('day');
-    dayElement.textContent = date.toDateString();
-    weekdays.appendChild(dayElement);
+    const dateKey = getDateKey(date.getFullYear(), date.getMonth() + 1, date.getDate());
+
+    const dayWorkouts = workoutList.filter(workout => workout.dateKey === dateKey);
+
+    const dayCard = document.createElement('div');
+    dayCard.innerHTML = `
+    <h3>${date.toDateString()}</h3>`;
+
+    if (dayWorkouts.length <= 0 ) {
+      dayCard.innerHTML += `<p>No workouts scheduled</p>`;
   }
+  else {
+    dayCard.innerHTML += '<ul>';
+    dayWorkouts.forEach(workout => {
+      dayCard.innerHTML += `<li>${workout.name}</li>`;
+    });
+    dayCard.innerHTML += '</ul>';
+  }
+  weekdays.appendChild(dayCard);
+  }
+
+
 };
 
 
 
+renderWeek();
 
-renderWeekdays();
-renderIndex();
+console.log(dateKey);
+console.log(workoutList[0]);
 
 
-
-
-console.log(workoutList);
 
 
 
