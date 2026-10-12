@@ -1,4 +1,5 @@
 const workoutList = [];
+const exercises = [];
 
 const saveWorkouts = () => {
     localStorage.setItem("workouts", JSON.stringify(workoutList));

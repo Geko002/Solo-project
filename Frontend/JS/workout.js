@@ -24,7 +24,8 @@ clickEvent.addEventListener("click", () => {
         duration: duration.value,
         note: note.value,
         date: getDateKey(now.getFullYear(), now.getMonth(), now.getDate()),
-        id: Date.now()
+        id: Date.now(),
+        exercises: []
     };
     if (selectedDateValue) {
         workoutObj.date = selectedDateValue;
@@ -53,6 +54,8 @@ const renderWorkouts = () => {
             <p><strong>Notes:</strong> ${workout.note}</p>
             <p><strong>Date:</strong> ${workout.date}</p>
             <button class="delete-btn">Delete</button>
+            <p><strong>Exercises:</strong> ${workout.exercises ? workout.exercises.join(", ") : "None"}</p>
+
         `;
 
         display.appendChild(card);
@@ -113,6 +116,10 @@ const renderCalendar = () => {
         });
     }
 };
+
+
+
+
 
 renderWorkouts();
 renderCalendar();

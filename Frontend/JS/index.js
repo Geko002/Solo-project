@@ -12,9 +12,12 @@ const renderWeek = () => {
   for (let i = 0; i < 7; i++) {
     const date = new Date();
     date.setDate(date.getDate() - monOffset + i);
-    const dateKey = getDateKey(date.getFullYear(), date.getMonth() + 1, date.getDate());
+    const dateKey = getDateKey(date.getFullYear(), date.getMonth(), date.getDate());
 
-    const dayWorkouts = workoutList.filter(workout => workout.dateKey === dateKey);
+    const dayWorkouts = workoutList.filter(workout => workout.date == dateKey);
+
+    console.log(dateKey);
+    console.log(workoutList[0]);
 
     const dayCard = document.createElement('div');
     dayCard.innerHTML = `
@@ -26,7 +29,7 @@ const renderWeek = () => {
   else {
     dayCard.innerHTML += '<ul>';
     dayWorkouts.forEach(workout => {
-      dayCard.innerHTML += `<li>${workout.name}</li>`;
+      dayCard.innerHTML += `<li>${workout.workName}</li>`;
     });
     dayCard.innerHTML += '</ul>';
   }
@@ -39,8 +42,6 @@ const renderWeek = () => {
 
 
 renderWeek();
-
-console.log(dateKey);
 console.log(workoutList[0]);
 
 
