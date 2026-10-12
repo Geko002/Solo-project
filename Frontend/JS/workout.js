@@ -6,6 +6,7 @@ const clickEvent = document.querySelector("#create");
 const display = document.getElementById("display");
 const showAllBtn = document.getElementById("show-all-btn");
 const dateInput = document.querySelector("#date");
+ 
 
 let selectedDate = null;
 
@@ -54,11 +55,38 @@ const renderWorkouts = () => {
             <p><strong>Notes:</strong> ${workout.note}</p>
             <p><strong>Date:</strong> ${workout.date}</p>
             <button class="delete-btn">Delete</button>
-            <p><strong>Exercises:</strong> ${workout.exercises ? workout.exercises.join(", ") : "None"}</p>
-
-        `;
+            <hr>
+            <input class="ex-name" placeholder="Exercise">
+            <input class="ex-sets" type="number" placeholder="Sets">
+            <input class="ex-reps" type="number" placeholder="Reps">
+            <input class="ex-rest" type="number" placeholder="Rest (s)">
+            <button class="add-ex-btn">Add Exercise</button>
+            <p><strong>Exercises:</strong> ${(workout.exercises || []).map(ex => `${ex.name} · ${ex.sets} × ${ex.reps} ·
+                 ${ex.rest} s`).join(", ") || "None"}</p>`;
 
         display.appendChild(card);
+
+
+        const exName = card.querySelector(".ex-name");
+        const exSets = card.querySelector(".ex-sets");
+        const exReps = card.querySelector(".ex-reps");
+        const exRest = card.querySelector(".ex-rest");
+        const addExBtn = card.querySelector(".add-ex-btn");
+
+        addExBtn.addEventListener("click", () => {
+        const exercise = {
+        name: exName.value,
+        sets: Number(exSets.value),
+        reps: Number(exReps.value),
+        rest: Number(exRest.value)
+    };
+    if (!workout.exercises) {
+        workout.exercises = [];
+    }
+    workout.exercises.push(exercise);
+    saveWorkouts();
+    renderWorkouts();
+}); 
 
     const deleteButton = card.querySelector(".delete-btn");
         deleteButton.addEventListener("click", () => {
@@ -72,6 +100,8 @@ const renderWorkouts = () => {
         });
     
     });
+
+
 };
 
 
