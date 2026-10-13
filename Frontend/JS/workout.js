@@ -6,15 +6,20 @@ const clickEvent = document.querySelector("#create");
 const display = document.getElementById("display");
 const showAllBtn = document.getElementById("show-all-btn");
 const dateInput = document.querySelector("#date");
+
  
 
 let selectedDate = null;
+let openId = null;
 
 showAllBtn.addEventListener("click", () => {
     dateInput.value = "";
     selectedDate = null;
     renderWorkouts();
 });
+
+
+
 
 clickEvent.addEventListener("click", () => {
     const now = new Date();
@@ -46,63 +51,87 @@ const renderWorkouts = () => {
     }
 
     workoutToShow.forEach(workout => {
+        const isOpen = openId === workout.id;
+        const exerciseCount = (workout.exercises || []).length;
         const card = document.createElement("div");
         card.className = "workout-card";
         card.innerHTML = `
-            <h4>Workout Name: ${workout.workName}</h4>
-            <p><strong>Type:</strong> ${workout.type}</p>
+        <button class="show-ex-btn">${workout.workName} · ${workout.date} · ${exerciseCount} exercises</button>
+          <p><strong>Type:</strong> ${workout.type}</p>
             <p><strong>Duration:</strong> ${workout.duration} minutes</p>
             <p><strong>Notes:</strong> ${workout.note}</p>
             <p><strong>Date:</strong> ${workout.date}</p>
             <button class="delete-btn">Delete</button>
-            <hr>
+              <hr>
+
+    `;
+
+    if (isOpen) {
+
+        card.innerHTML += `
             <input class="ex-name" placeholder="Exercise">
             <input class="ex-sets" type="number" placeholder="Sets">
             <input class="ex-reps" type="number" placeholder="Reps">
             <input class="ex-rest" type="number" placeholder="Rest (s)">
             <button class="add-ex-btn">Add Exercise</button>
-            <p><strong>Exercises:</strong> ${(workout.exercises || []).map(ex => `${ex.name} · ${ex.sets} × ${ex.reps} ·
-                 ${ex.rest} s`).join(", ") || "None"}</p>`;
+            <p><strong>Exercises:</strong> ${(workout.exercises || []).map(ex => `${ex.name} ·
+                 ${ex.sets} × ${ex.reps} · ${ex.rest} s`).join(", ") || "None"}</p>
+                `;
 
+    }
+         
         display.appendChild(card);
 
+        const showExBtn = card.querySelector(".show-ex-btn");
+        showExBtn.addEventListener("click", () => {
+            if (openId === workout.id) {
+                openId = null;
+            } else {
+                openId = workout.id;
+            }
+            renderWorkouts();
+        });
 
-        const exName = card.querySelector(".ex-name");
-        const exSets = card.querySelector(".ex-sets");
-        const exReps = card.querySelector(".ex-reps");
-        const exRest = card.querySelector(".ex-rest");
-        const addExBtn = card.querySelector(".add-ex-btn");
+        const deleteButton = card.querySelector(".delete-btn");
 
-        addExBtn.addEventListener("click", () => {
-        const exercise = {
-        name: exName.value,
-        sets: Number(exSets.value),
-        reps: Number(exReps.value),
-        rest: Number(exRest.value)
-    };
-    if (!workout.exercises) {
-        workout.exercises = [];
-    }
-    workout.exercises.push(exercise);
-    saveWorkouts();
-    renderWorkouts();
-}); 
-
-    const deleteButton = card.querySelector(".delete-btn");
         deleteButton.addEventListener("click", () => {
-            const index = workoutList.findIndex(w => w.id === workout.id)
-            if (index !== -1) {
+        const index = workoutList.findIndex(w => w.id === workout.id)
+           
+        if (index !== -1) {
                 workoutList.splice(index, 1);
                 saveWorkouts();
                 renderWorkouts();
                 renderCalendar();
             }
         });
+
+        if (isOpen) {
+            const exName = card.querySelector(".ex-name");
+            const exSets = card.querySelector(".ex-sets");
+            const exReps = card.querySelector(".ex-reps");
+            const exRest = card.querySelector(".ex-rest");
+            const addExBtn = card.querySelector(".add-ex-btn");
+
+            addExBtn.addEventListener("click", () => {
+                const exercise = {
+                    name: exName.value,
+                    sets: Number(exSets.value),
+                    reps: Number(exReps.value),
+                    rest: Number(exRest.value)
+                };
+
+                if (!workout.exercises) {
+                    workout.exercises = [];
+                }
+                workout.exercises.push(exercise);
+                saveWorkouts();
+                renderWorkouts();
+            });
+        }
     
     });
 
-
-};
+    };
 
 
 
