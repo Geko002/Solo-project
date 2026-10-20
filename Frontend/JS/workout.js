@@ -74,8 +74,8 @@ const renderWorkouts = () => {
             <input class="ex-reps" type="number" placeholder="Reps">
             <input class="ex-rest" type="number" placeholder="Rest (s)">
             <button class="add-ex-btn">Add Exercise</button>
-            <p><strong>Exercises:</strong> ${(workout.exercises || []).map(ex => `${ex.name} ·
-                 ${ex.sets} × ${ex.reps} · <span class="timer">${ex.rest}</span> s
+            <p><strong>Exercises:</strong> ${(workout.exercises || []).map(ex => `${ex.name} · <span class="sets-left">${ex.sets}</span>
+                  × ${ex.reps} · <span class="timer">${ex.rest}</span> s
                  <button class="play-btn">▶</button>`).join(", ") || "None"}</p>
                 `;
  
@@ -114,6 +114,7 @@ const renderWorkouts = () => {
             const addExBtn = card.querySelector(".add-ex-btn");
             const playButton = card.querySelectorAll(".play-btn");
             const timeCount = card.querySelectorAll(".timer");
+            const leftSets = card.querySelectorAll(".sets-left");
  
             addExBtn.addEventListener("click", () => {
                 const exercise = {
@@ -137,6 +138,7 @@ const renderWorkouts = () => {
             playButton.forEach((button, index) => {
 
             let countDown = workout.exercises[index].rest;
+            let setsLeft = workout.exercises[index].sets;
             let timerId = null;
 
 
@@ -154,10 +156,28 @@ const renderWorkouts = () => {
 
                             if (countDown === 0) {
                                 clearInterval(timerId);
+                                setsLeft = setsLeft - 1;
+                               
+                               
+                                if (setsLeft === 0) {
+                                    clearInterval(timerId);
+                                    timerId = null;
+                                    button.disabled = true;
+                                }
+
+                                else{
+                                    playButton[index].textContent = "▶";
+                                }
+
+                                leftSets[index].textContent = setsLeft;
+                                countDown = workout.exercises[index].rest;
+                                timeCount[index].textContent = countDown;
                                 timerId = null;
                                 console.log("Time countdown done");
-                                timeCount[index].textContent = "Done ✓";                                playButton[index].textContent = "▶";
+
                             }
+                        
+                        
                         }, 1000);
                         playButton[index].textContent = "⏸";
                     }
