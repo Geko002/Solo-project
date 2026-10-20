@@ -130,20 +130,37 @@ const renderWorkouts = () => {
                 saveWorkouts();
                 renderWorkouts();
             });
+
+           
+
  
             playButton.forEach((button, index) => {
+
+            let countDown = workout.exercises[index].rest;
+            let timerId = null;
+
+
                 button.addEventListener("click", () => {
-                    let countDown = workout.exercises[index].rest;
- 
-                    const timerId = setInterval(() => {
-                        countDown = countDown - 1;
-                        timeCount[index].textContent = countDown;
- 
-                        if (countDown === 0) {
-                            clearInterval(timerId);
-                            console.log("Time countdown done");
-                        }
-                    }, 1000);
+
+                    if (timerId) {
+                        clearInterval(timerId);
+                        timerId = null;
+                        playButton[index].textContent = "▶";
+                    }
+                    else{
+                            timerId = setInterval(() => {
+                            countDown = countDown - 1;
+                            timeCount[index].textContent = countDown;
+
+                            if (countDown === 0) {
+                                clearInterval(timerId);
+                                timerId = null;
+                                console.log("Time countdown done");
+                                timeCount[index].textContent = "Done ✓";                                playButton[index].textContent = "▶";
+                            }
+                        }, 1000);
+                        playButton[index].textContent = "⏸";
+                    }
                 });
             });
         }
