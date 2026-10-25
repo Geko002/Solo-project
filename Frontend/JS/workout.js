@@ -56,30 +56,98 @@ const renderWorkouts = () => {
         const card = document.createElement("div");
         card.className = "workout-card";
         card.innerHTML = `
-        <button class="show-ex-btn">${workout.workName} · ${workout.date} · ${exerciseCount} exercises</button>
-          <p><strong>Type:</strong> ${workout.type}</p>
+            <button class="show-ex-btn">${workout.workName} · ${workout.date} · ${exerciseCount} exercises</button>
+            <p><strong>Type:</strong> ${workout.type}</p>
             <p><strong>Duration:</strong> ${workout.duration} minutes</p>
             <p><strong>Notes:</strong> ${workout.note}</p>
             <p><strong>Date:</strong> ${workout.date}</p>
+            <div class="ex-box">
+                <b>Exercises:</b>
+                <div class="ex-list"></div>
+                <div class="ex-form"></div>
+            </div>
             <button class="delete-btn">Delete</button>
-              <hr>
- 
-    `;
- 
+        `;
+
     if (isOpen) {
  
-        card.innerHTML += `
-            <input class="ex-name" placeholder="Exercise">
-            <input class="ex-sets" type="number" placeholder="Sets">
-            <input class="ex-reps" type="number" placeholder="Reps">
-            <input class="ex-rest" type="number" placeholder="Rest (s)">
-            <button class="add-ex-btn">Add Exercise</button>
-            <p><strong>Exercises:</strong> ${(workout.exercises || []).map(ex => `${ex.name} · <span class="sets-left">${ex.sets}</span>
-                  × ${ex.reps} · <span class="timer">${ex.rest}</span> s
-                 <button class="play-btn">▶</button>`).join(", ") || "None"}</p>
-                `;
- 
+         card.querySelector(".ex-form").innerHTML = `
+                <input class="ex-name" placeholder="Exercise">
+                <input class="ex-sets" type="number" placeholder="Sets">
+                <input class="ex-reps" type="number" placeholder="Reps">
+                <input class="ex-rest" type="number" placeholder="Rest (s)">
+                <button class="add-ex-btn">Add Exercise</button>
+            `;
     }
+    
+        const exList = card.querySelector(".ex-list");
+
+        if(exerciseCount === 0){
+            exList.textContent = "No exercises added.";
+        }
+
+        (workout.exercises || []).forEach(ex => {
+            
+            const exRow = document.createElement("div");
+            exRow.className = "ex-row";
+            exRow.innerHTML = `${ex.name} · 
+            <span class="sets-left">${ex.sets}</span> × ${ex.reps} ·
+            <span class="timer">${ex.rest}</span> s 
+            <button class="play-btn">▶</button>`;            
+            exList.appendChild(exRow);
+
+            const playButton = exRow.querySelector(".play-btn");
+            const timer = exRow.querySelector(".timer");
+            const leftSets = exRow.querySelector(".sets-left");
+
+           
+        let countDown = ex.rest;
+        let setsLeft = ex.sets;
+        let timerId = null;
+
+        playButton.addEventListener("click", () => {
+             if (timerId) {
+                        clearInterval(timerId);
+                        timerId = null;
+                        playButton.textContent = "▶";
+                    }
+                    else{
+                            timerId = setInterval(() => {
+                            countDown = countDown - 1;
+                            timer.textContent = countDown;
+
+                            if (countDown === 0) {
+                                clearInterval(timerId);
+                                setsLeft = setsLeft - 1;
+                               
+                               
+                                if (setsLeft === 0) {
+                                    clearInterval(timerId);
+                                    timerId = null;
+                                    playButton.disabled = true;
+                                }
+
+                                else{
+                                    playButton.textContent = "▶";
+                                }
+
+                                leftSets.textContent = setsLeft;
+                                countDown = ex.rest;
+                                timer.textContent = countDown;
+                                timerId = null;
+                                console.log("Time countdown done");
+
+                            }
+                        
+                        
+                        }, 1000);
+                        playButton.textContent = "⏸";
+                    }
+
+        });
+
+       });
+        
  
         display.appendChild(card);
  
@@ -112,9 +180,7 @@ const renderWorkouts = () => {
             const exReps = card.querySelector(".ex-reps");
             const exRest = card.querySelector(".ex-rest");
             const addExBtn = card.querySelector(".add-ex-btn");
-            const playButton = card.querySelectorAll(".play-btn");
-            const timeCount = card.querySelectorAll(".timer");
-            const leftSets = card.querySelectorAll(".sets-left");
+      
  
             addExBtn.addEventListener("click", () => {
                 const exercise = {
@@ -131,64 +197,10 @@ const renderWorkouts = () => {
                 saveWorkouts();
                 renderWorkouts();
             });
-
-           
-
- 
-            playButton.forEach((button, index) => {
-
-            let countDown = workout.exercises[index].rest;
-            let setsLeft = workout.exercises[index].sets;
-            let timerId = null;
-
-
-                button.addEventListener("click", () => {
-
-                    if (timerId) {
-                        clearInterval(timerId);
-                        timerId = null;
-                        playButton[index].textContent = "▶";
-                    }
-                    else{
-                            timerId = setInterval(() => {
-                            countDown = countDown - 1;
-                            timeCount[index].textContent = countDown;
-
-                            if (countDown === 0) {
-                                clearInterval(timerId);
-                                setsLeft = setsLeft - 1;
-                               
-                               
-                                if (setsLeft === 0) {
-                                    clearInterval(timerId);
-                                    timerId = null;
-                                    button.disabled = true;
-                                }
-
-                                else{
-                                    playButton[index].textContent = "▶";
-                                }
-
-                                leftSets[index].textContent = setsLeft;
-                                countDown = workout.exercises[index].rest;
-                                timeCount[index].textContent = countDown;
-                                timerId = null;
-                                console.log("Time countdown done");
-
-                            }
-                        
-                        
-                        }, 1000);
-                        playButton[index].textContent = "⏸";
-                    }
-                });
-            });
         }
  
     });
- 
-    };
- 
+};
  
  
 const renderCalendar = () => {
