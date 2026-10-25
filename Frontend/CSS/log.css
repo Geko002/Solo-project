@@ -1,11 +1,21 @@
+
+:root {
+  --sand: #F4EFE8;
+  --paper: #FFFFFF;
+  --ink: #16181A;
+  --stone: #4A4F54;
+  --ember: #C2410C;
+  --teal: #0F5257;
+}
+
 * {
   margin: 0;
-  padding: 3px;
   box-sizing: border-box;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 body {
-    background-color: rgb(235, 223, 208);;
+    background-color: var(--sand);
+    font-family: "Source Sans 3", sans-serif;
+    color: var(--ink);
 }
 
 .workout-form {
@@ -13,25 +23,27 @@ body {
     padding: 30px;
     border: 2px solid;
     border-radius: 10px;
-    background-color: white
+    background-color: var(--paper);
 }
 
 .workout-form form {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    font-family: 'Archivo', sans-serif;
 }
 
 .workout-form input {
     padding: 8px;
+    font-family: 'Archivo', sans-serif;
 }
 
 .workout-form button {
     padding: 10px;
-    background-color: rgb(20, 19, 19);
-    color: rgb(228, 212, 212);
+    background-color: var(--ink);
+    color: var(--paper);
     cursor: pointer;
-    border: 3px solid white;
+    border: 3px solid var(--paper);
     border-radius: 8px;
 }
 
@@ -43,10 +55,12 @@ body {
     padding: 8px 20px;
     width: fit-content;
     margin: 0 auto;
-    background-color: white;
+    background-color: var(--paper);
+    font-family: 'Archivo', sans-serif;
 }
 
 .header h3 a{
+    font-family: 'Archivo', sans-serif;
     text-decoration: none;
     color: black;
     cursor: pointer;
@@ -63,7 +77,7 @@ body {
   margin-bottom: 50%;
   border: 2px solid;
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--paper);
 }
 #display {
     display: flex;
@@ -75,13 +89,14 @@ body {
 .workout-card {
     margin: 0 0 auto 50px;
     padding: 25px;
-    border: 2px solid #222;
+    border: 2px solid var(--ink)    ;
     border-radius: 10px;
-    background-color: white;
+    background-color: var(--paper);
     box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15);
 }
 
 .workout-card h3 {
+    font-family: 'Archivo', sans-serif;
     margin-bottom: 15px;
     font-size: 20px;
 }
@@ -97,9 +112,143 @@ body {
 }
 
 .Completed {
-    background-color: green;
+    background-color: var(--teal);
+    color: var(--paper);
+    font-family: 'Archivo', sans-serif;
+}
+.not-completed {
+    background-color: var(--paper);
+    color: var(--ink);
+    border: 1px solid #D9D0C3;
 }
 
-.not-completed {
+.h1, h2, h3 {
+    font-family: 'Archivo', sans-serif; 
+}
+
+.input, button {
+    font-family: 'Archivo', inherit;
+}
+
+.ex-box {
+ background-color: var(--sand);
+ border-radius: 12px;
+ padding: 12px;
+ margin: 12px 0;
+ border : 0.5px solid var(--ink);
+
+}
+.ex-row {
+    display: flex;
+   
+   
+}
+
+.ex-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.play-btn {
+    background-color: var(--ink);
+    border-radius: 45%;
+    border-color: var(--paper);
+    color: var(--paper);
+    margin-left: auto;
     
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+
+    &:hover {
+        background-color: var(--ember);
+        color: var(--paper);
+        border-color: var(--ember);
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+
+    }
+}
+.show-ex-btn {
+    background-color: var(--ink);
+    color: var(--paper);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Archivo', sans-serif;
+    padding: 8px 16px;
+    margin: 8px 0;
+    &:hover {
+        background-color: var(--ember);
+        color: var(--paper);
+        border-color: var(--ember);
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+}
+
+.ex-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    margin-top: 12px;
+}
+
+.ex-name,
+.add-ex-btn {
+    grid-column: 1 / -1;
+}
+.ex-form input {
+    padding: 10px;
+    border: 1px solid #D9D0C3;
+    border-radius: 8px;
+    background-color: var(--paper);
+    font-size: 15px;
+    transition: border-color 0.2s;
+}
+.ex-form input:focus {
+    outline: none;
+    border-color: var(--ember);
+}
+
+.ex-form input, .ex-form textarea {
+    font-family: 'Archivo', sans-serif;
+    padding: 8px;
+    border: 1px solid var(--ink);
+    border-radius: 8px;
+    background-color: var(--paper);
+}
+.add-ex-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--ink);
+    color: var(--paper);
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s, background-color 0.2s;
+}
+.add-ex-btn:hover {
+    background-color: var(--ember);
+    transform: scale(1.05);
+}
+
+.ex-row {
+    display: flex;
+    align-items: center;   /* text and button on the same line */
+    gap: 8px;
+    padding: 6px 0;
+}
+.delete-btn{
+    font-family: 'Archivo', sans-serif;
+    background-color: var(--ink);
+    margin-left: auto;
+    color: var(--paper);
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+.delete-btn:hover {
+    background-color: red;
+    color: var(--paper);
 }
