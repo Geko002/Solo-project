@@ -55,8 +55,12 @@ const renderWorkouts = () => {
         const exerciseCount = (workout.exercises || []).length;
         const card = document.createElement("div");
         card.className = "workout-card";
+        
         card.innerHTML = `
-            <button class="show-ex-btn">${workout.workName} · ${workout.date} · ${exerciseCount} exercises</button>
+
+
+            <p><Strong>${workout.workName}</Strong> <br> Total: ${exerciseCount} exercises</p>
+            <hr>
             <p><strong>Type:</strong> ${workout.type}</p>
             <p><strong>Duration:</strong> ${workout.duration} minutes</p>
             <p><strong>Notes:</strong> ${workout.note}</p>
@@ -66,10 +70,19 @@ const renderWorkouts = () => {
                 <div class="ex-list"></div>
                 <div class="ex-form"></div>
             </div>
-            <button class="delete-btn">Delete</button>
+            <div class="card-buttons">
+            <button class="show-ex-btn">+ Add Exercise</button>
+            <button class="delete-btn">Delete LOG</button>
+            </div>
         `;
 
     if (isOpen) {
+
+        card.querySelector(".show-ex-btn").textContent = isOpen ?  
+        "Close" : "+ Add Exercise";
+        if(isOpen){
+            card.querySelector(".show-ex-btn").classList.add("is-open");
+        }
  
          card.querySelector(".ex-form").innerHTML = `
                 <input class="ex-name" placeholder="Exercise">

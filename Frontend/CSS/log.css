@@ -34,6 +34,10 @@ body {
 }
 
 .workout-form input {
+    border:none;
+    border-bottom: 1px solid var(--stone);
+    background-color: transparent;
+    border-radius: none;
     padding: 8px;
     font-family: 'Archivo', sans-serif;
 }
@@ -238,17 +242,22 @@ body {
     padding: 6px 0;
 }
 .delete-btn{
+    padding: 8px 16px;
     font-family: 'Archivo', sans-serif;
-    background-color: var(--ink);
     margin-left: auto;
-    color: var(--paper);
-    border: none;
     border-radius: 8px;
-    padding: 6px 12px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
+    background-color: transparent;
+    color: var(--stone);
+    border: 1px solid #D9D0C3;
 }
 .delete-btn:hover {
     background-color: red;
     color: var(--paper);
+}
+
+.card-buttons {
+    display: flex;
+    gap: 8px;
 }
