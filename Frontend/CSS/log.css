@@ -116,14 +116,26 @@ body {
 }
 
 .Completed {
-    background-color: var(--teal);
+    background-color: var(--ember);
+    border: 1px solid var(--ember);
+    border-radius: 3px;
     color: var(--paper);
     font-family: 'Archivo', sans-serif;
 }
 .not-completed {
+    border-radius: 3px;
+    border-color: var(--ink);
     background-color: var(--paper);
     color: var(--ink);
-    border: 1px solid #D9D0C3;
+    border: 1px solid var(--ink);
+
+    &:hover {
+        background-color: var(--ember);
+        color: var(--paper);
+        border-color: var(--ember);
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
 }
 
 .h1, h2, h3 {
@@ -154,18 +166,19 @@ body {
 }
 
 .play-btn {
-    background-color: var(--ink);
-    border-radius: 45%;
+    background-color: var(--paper);
+    border-radius: 8px;
     border-color: var(--paper);
-    color: var(--paper);
+    color: var(--ink);
     margin-left: auto;
+    border: 1px solid var(--ink);
     
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 
     &:hover {
-        background-color: var(--ember);
+        background-color: var(--ink);
         color: var(--paper);
-        border-color: var(--ember);
+        border-color: var(--paper);
         cursor: pointer;
         transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 
@@ -260,4 +273,22 @@ body {
 .card-buttons {
     display: flex;
     gap: 8px;
+}
+.trash-icon {
+    filter: grayscale(1) brightness(0);
+}
+.delete-ex-btn {
+    padding: 4px 8px;
+    font-family: 'Archivo', sans-serif;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 160px;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: var(--paper);
+    color: var(--stone);
+    border: 1px solid var(--ink);
+}
+.delete-ex-btn:hover {
+    background-color: red;
+    color: var(--paper);
 }

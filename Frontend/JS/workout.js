@@ -106,17 +106,28 @@ const renderWorkouts = () => {
             exRow.innerHTML = `${ex.name} · 
             <span class="sets-left">${ex.sets}</span> × ${ex.reps} ·
             <span class="timer">${ex.rest}</span> s 
+            <button class="delete-ex-btn">✕</button>
             <button class="play-btn">▶</button>`;            
             exList.appendChild(exRow);
 
             const playButton = exRow.querySelector(".play-btn");
             const timer = exRow.querySelector(".timer");
             const leftSets = exRow.querySelector(".sets-left");
+            const deleteExButton = exRow.querySelector(".delete-ex-btn");
 
-           
+            deleteExButton.addEventListener("click", () => {
+                const exIndex = workout.exercises.findIndex(e => workout.exercises.indexOf(e));
+                if (exIndex !== -1) {
+                    workout.exercises.splice(exIndex, 1);
+                     saveWorkouts();
+                     renderWorkouts();
+                }
+               console.log("Exercise deleted", workout.exercises);
+            });
         let countDown = ex.rest;
         let setsLeft = ex.sets;
         let timerId = null;
+        
 
         playButton.addEventListener("click", () => {
              if (timerId) {
