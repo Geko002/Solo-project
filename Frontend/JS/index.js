@@ -42,7 +42,6 @@ const renderWeek = () => {
 
 
 renderWeek();
-console.log(workoutList[0]);
 
 
 

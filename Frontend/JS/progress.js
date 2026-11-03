@@ -6,19 +6,21 @@ const updateList = [];
 
 const updateProgress = () => {
 
-    let total = 0;
-    const daysCount = new Date().getDay();
-    const weeks = new Date().getWeek();
-    const min = new Date().getMinutes();
-    const dateKey = getDateKey(new Date().getWeek(), new Date().getDay(), new Date().getMinutes());
-    
-    const monOffset = (daysCount + 6) % 7;
-
+const mondayOffset = (new Date().getDay() + 6) % 7;    
     for (let i = 0; i < 7; i++) {
-        const currentDate = new Date();
-        const currentDateKey = getDateKey(currentDate.getWeek(), currentDate.getDay(), currentDate.getMinutes());
+    const newDate = new Date();
+    newDate.setDate(newDate.getDate() - mondayOffset + i);
+    const dayKey = getDateKey(newDate.getFullYear(), newDate.getMonth(), newDate.getDate());
 
- 
+    updateList.push(dayKey);
+
 }
-console.log(updateList);
 
+    const filtered = workoutList.filter(item => updateList.includes(item.date));
+    if (filtered.length > 0) {
+        weekCount.textContent = filtered.length;
+         filtered.length;
+    }
+    console.log(filtered);
+}
+updateProgress();
