@@ -116,7 +116,7 @@ const renderWorkouts = () => {
             const deleteExButton = exRow.querySelector(".delete-ex-btn");
 
             deleteExButton.addEventListener("click", () => {
-                const exIndex = workout.exercises.findIndex(e => workout.exercises.indexOf(e));
+                const exIndex = workout.exercises.indexOf(ex);
                 if (exIndex !== -1) {
                     workout.exercises.splice(exIndex, 1);
                      saveWorkouts();

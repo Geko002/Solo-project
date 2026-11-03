@@ -250,7 +250,7 @@ body {
 
 .ex-row {
     display: flex;
-    align-items: center;   /* text and button on the same line */
+    align-items: center;  
     gap: 8px;
     padding: 6px 0;
 }
@@ -291,4 +291,23 @@ body {
 .delete-ex-btn:hover {
     background-color: red;
     color: var(--paper);
+}
+
+.stat-card {
+   display: inline-flex;
+   flex-direction: column;
+   font-family: 'Archivo', sans-serif;
+   gap: 4px;
+   margin-bottom: 8px;
+   padding: 12px;
+   margin-left: 8px;
+   border: 1px solid var(--ink);
+   border-radius: 8px;
+   background-color: var(--paper);
+}
+.stat-label {
+    font: 500 15px 'Archivo', sans-serif;
+}
+.stat-number {
+    font-size: 1.2em;
 }

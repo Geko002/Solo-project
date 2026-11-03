@@ -20,5 +20,7 @@ const getDateKey = (year, month, day) => {
     return `${year}-${month}-${day}`;
 };
 
+
+
 loadWorkouts();
 console.log(workoutList);
