@@ -4,47 +4,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fitness Tracker</title>
+  <title>Fit Tracker</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
   <link rel="stylesheet" href="../CSS/style.css">
   <script src="../JS/shared.js" defer></script>
-<script src="../JS/progress.js" defer></script>
+  <script src="../JS/index.js" defer></script>
 </head>
 
 <body>
 
-<header class="header">
+  <header class="header">
+    <div class="header-inner">
 
-  <h3><a href="index.html">FIT TRACKER</a></h3>
+      <h3><a href="index.html">FIT TRACKER</a></h3>
 
-  <nav class="nav-bar">
-    <ul>
-      <li><a href ="workouts.html">Workouts</a></li>
-      <li><a href="progress.html">Progress</a></li>
-      <li><a href="#">About</a></li>
-    </ul>
-  </nav>
+      <nav class="nav-bar">
+        <ul>
+          <li><a href="index.html" class="active">This week</a></li>
+          <li><a href="workouts.html">Workouts</a></li>
+          <li><a href="progress.html">Progress</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </nav>
 
-</header>
+      <a class="cta" href="workouts.html">+ Log workout</a>
 
+    </div>
+  </header>
 
-<main>
+  <main class="page">
 
-  <div id="week"></div>
+    <div class="page-head">
+      <h1>This week</h1>
 
-</main>
+      <p>Overview of your week</p>
 
+    </div>
+      <div class="pills">
+      <div class="pill">3 days</div>
+      <div class="pill">1 hour and 45 min</div>
+      <div class="pill">Current Streak : <b></b>4</div>
 
+    </div>
 
-<hr>
+    <div id="week"></div>
 
-<footer class="copyright">
+  </main>
 
-<p> &copy; 2026 Fitness Tracker. All rights reserved.</p>
-
-</footer>
-
-<hr>
-
+  <footer class="copyright">
+    <p>&copy; 2026 Fit Tracker</p>
+  </footer>
 
 </body>
 

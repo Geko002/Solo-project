@@ -20,18 +20,30 @@ const renderWeek = () => {
     console.log(workoutList[0]);
 
     const dayCard = document.createElement('div');
+    dayCard.className = "day-card";
     dayCard.innerHTML = `
-    <h3>${date.toDateString()}</h3>`;
-
+    <p><b>${date.toLocaleDateString('en-US', { weekday: 'long' })}</b></p>`;
+    dayCard.innerHTML += `<p style='color: var(--stone)'>${date.toLocaleDateString('en-US', {day: 'numeric', month: 'short' })}</p>`;
+    
     if (dayWorkouts.length <= 0 ) {
-      dayCard.innerHTML += `<p>No workouts scheduled</p>`;
+      dayCard.innerHTML += "<p class='rest-day'>Rest Day</p>";
   }
   else {
-    dayCard.innerHTML += '<ul>';
-    dayWorkouts.forEach(workout => {
-      dayCard.innerHTML += `<li>${workout.workName}</li>`;
-    });
-    dayCard.innerHTML += '</ul>';
+
+       let list = '<ul class="day-workouts">';
+       dayWorkouts.forEach(workout => {
+       const count = (workout.exercises || []).length;
+    list += `
+        <li class="workout-pill">
+            <b>${workout.workName}</b>
+            <span>${workout.type} 
+            <br>
+            ${workout.duration} min <br> ${count} 
+            exercises</span>
+        </li>`;
+});
+list += '</ul>';
+dayCard.innerHTML += list;
   }
   weekdays.appendChild(dayCard);
   }
