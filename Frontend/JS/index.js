@@ -4,7 +4,7 @@ const weekdays = document.getElementById('week');
 
 const renderWeek = () => {
 
-  weekdays.innerHTML = '';
+  weekdays.innerHTML = "";
   
   const days = new Date().getDay();
   const monOffset = (days + 6) % 7;
@@ -34,20 +34,24 @@ const renderWeek = () => {
        dayWorkouts.forEach(workout => {
        const count = (workout.exercises || []).length;
     list += `
-        <li class="workout-pill">
+        <li>
+        <a class="workout-pill" href="log.html?id=${workout.id}">
             <b>${workout.workName}</b>
             <span>${workout.type} 
             <br>
             ${workout.duration} min <br> ${count} 
             exercises</span>
+            </a>
         </li>`;
 });
+
 list += '</ul>';
 dayCard.innerHTML += list;
-  }
-  weekdays.appendChild(dayCard);
-  }
 
+}
+  weekdays.appendChild(dayCard);
+
+}
 
 };
 

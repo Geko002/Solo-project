@@ -15,7 +15,6 @@
 body {
   background-color: var(--sand)
 }
-
 .header {
   background-color: var(--paper);
   border-bottom: 1px solid var(--line);
@@ -204,4 +203,27 @@ body {
   color: var(--stone);
   font-weight: 600;
 }
+
+.nav-bar a {
+    border-bottom: 2.5px solid transparent;   
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.nav-bar a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--line);         
+}
+
+.nav-bar a.active {
+    color: var(--ink);
+    border-bottom-color: var(--ember);        
+}
+
+a.workout-pill {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+
   

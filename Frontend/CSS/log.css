@@ -12,6 +12,7 @@
   margin: 0;
   box-sizing: border-box;
 }
+
 body {
     background-color: var(--sand);
     font-family: "Source Sans 3", sans-serif;
@@ -34,7 +35,7 @@ body {
 }
 
 .workout-form input {
-    border:none;
+    border: none;
     border-bottom: 1px solid var(--stone);
     background-color: transparent;
     border-radius: none;
@@ -70,7 +71,6 @@ body {
     cursor: pointer;
 }
 .container {
-  min-height: 100vh;
   display: flex;
   gap: 40px;
 }
@@ -310,4 +310,19 @@ body {
 }
 .stat-number {
     font-size: 1.2em;
+}
+
+.nav-bar a {
+    border-bottom: 2.5px solid transparent;   
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.nav-bar a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--line);         
+}
+
+.nav-bar a.active {
+    color: var(--ink);
+    border-bottom-color: var(--ember);        
 }

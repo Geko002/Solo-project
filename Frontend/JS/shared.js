@@ -20,6 +20,15 @@ const getDateKey = (year, month, day) => {
     return `${year}-${month}-${day}`;
 };
 
+const currentpage = window.location.pathname.split("/").pop();
+
+document.querySelectorAll(".nav-link").forEach((link) => {
+    if (link.getAttribute("href") === currentpage) {
+        link.classList.add("active");
+    }
+});
+
+
 
 
 loadWorkouts();
